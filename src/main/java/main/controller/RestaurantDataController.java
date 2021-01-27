@@ -16,7 +16,7 @@ import com.google.gson.JsonParser;
 import main.model.Restaurant;
 import main.service.APICallService;
 
-@CrossOrigin //probably not 100% secure but whatever LOL
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/api/v1")
 public class RestaurantDataController {

@@ -17,12 +17,17 @@ public class APICallService {
 		
 	}
 	
-	public String searchForBusinesses(double lat, double lng,String food_type) {
+	/**
+	 * @param lat the latitude of the business
+	 * @param lng the longitude of the business
+	 * @param meal_type the type of meal to seach for(lunch for example)
+	 * @return
+	 */
+	public String searchForBusinesses(double lat, double lng,String meal_type) {
 		String NEARBY_BUSINESS_API_URL = "https://api.yelp.com/v3/businesses/search"+
 				"?latitude=" + lat + "&longitude=" + lng 
-				+ "&term=" + food_type + "&limit=" + RESULTS_LIMIT + "&open_now=True";
+				+ "&term=" + meal_type + "&limit=" + RESULTS_LIMIT + "&open_now=True";
 
-		//get request here
 		try {
 			URL url = new URL(NEARBY_BUSINESS_API_URL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -45,9 +50,11 @@ public class APICallService {
 		
 		return result;
 	}
-	
-	
-	//BwJnhjN-ogCmvYY864Lkww
+		
+	/**
+	 * @param business_id the id of the business from yelp
+	 * @return
+	 */
 	public String getSingleBusinessDetails(String business_id) {
 		String SINGLE_BUSINESS_API_URL = "https://api.yelp.com/v3/businesses/" + business_id;
 		
