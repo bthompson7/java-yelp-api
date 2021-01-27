@@ -47,9 +47,31 @@ public class APICallService {
 	}
 	
 	
-	//TODO implement
-	public String getSingleBusinessDetails(String bussiness_id) {
-		String SINGLE_BUSINESS_API_URL = "";
-		return "";
+	//BwJnhjN-ogCmvYY864Lkww
+	public String getSingleBusinessDetails(String business_id) {
+		String SINGLE_BUSINESS_API_URL = "https://api.yelp.com/v3/businesses/" + business_id;
+		
+		
+				try {
+					URL url = new URL(SINGLE_BUSINESS_API_URL);
+					HttpURLConnection con = (HttpURLConnection) url.openConnection();
+					con.setRequestProperty("Content-Type", "application/json");
+					con.setRequestProperty("Authorization", "Bearer " + API_KEY);
+					con.setRequestMethod("GET");
+					
+					BufferedReader in = new BufferedReader(
+							  new InputStreamReader(con.getInputStream()));
+							String inputLine;
+							StringBuffer content = new StringBuffer();
+							while ((inputLine = in.readLine()) != null) {
+							    content.append(inputLine);
+							}
+							result = content.toString();
+							in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return result;
 	}
 }
