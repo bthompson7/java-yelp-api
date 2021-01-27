@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import main.model.Restaurant;
+import main.model.RestaurantDetails;
 import main.service.APICallService;
 
 @CrossOrigin
@@ -15,14 +16,14 @@ import main.service.APICallService;
 public class RestaurantDetailsController {
 
 	@GetMapping(path="/getSingleRestaurant")
-	public Restaurant data(
+	public RestaurantDetails data(
 			@RequestParam(value = "id", defaultValue = "BwJnhjN-ogCmvYY864Lkww") String id){
 		
 	
 		APICallService api = new APICallService();
 		String dataFromYelp = api.getSingleBusinessDetails(id);
 
-		return new Restaurant(dataFromYelp);
+		return new RestaurantDetails(dataFromYelp);
 	}
 	
 	

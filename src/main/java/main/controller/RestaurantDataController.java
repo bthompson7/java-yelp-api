@@ -16,7 +16,7 @@ import com.google.gson.JsonParser;
 import main.model.Restaurant;
 import main.service.APICallService;
 
-@CrossOrigin
+@CrossOrigin //probably not 100% secure but whatever LOL
 @RestController
 @RequestMapping(path = "/api/v1")
 public class RestaurantDataController {
@@ -31,7 +31,7 @@ public class RestaurantDataController {
 		APICallService api = new APICallService();
 		String dataFromYelp = api.searchForBusinesses(lat, lng, food_type);
 
-		// parsing the json data from yelp
+		//parsing the json data from yelp
 		JsonObject jsonObject = JsonParser.parseString(dataFromYelp.toString()).getAsJsonObject();
 		JsonArray rest_list = jsonObject.get("businesses").getAsJsonArray();
 
