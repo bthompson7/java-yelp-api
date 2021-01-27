@@ -24,7 +24,7 @@ public class RestaurantDataController {
 	@GetMapping(path = "/getRestaurantData")
 	public List<Restaurant> data(@RequestParam(value = "lat", defaultValue = "0") double lat,
 			@RequestParam(value = "lng", defaultValue = "0") double lng,
-			@RequestParam(value = "food_type", defaultValue = "lunch") String food_type) {
+			@RequestParam(value = "meal_type", defaultValue = "lunch") String food_type) {
 
 		List<Restaurant> list = new ArrayList<Restaurant>();
 
@@ -51,13 +51,16 @@ public class RestaurantDataController {
 			JsonObject loc = restaurant.get("location").getAsJsonObject();
 			
 			String address = loc.get("address1").toString() + loc.get("address2").toString()
-				+ loc.get("address3").toString() + loc.get("city").toString()
-            + loc.get("state").toString();
+				+ loc.get("address3").toString();
+			
+			
+			String city = loc.get("city").toString();
+            String state = loc.get("state").toString();
 
 
 
 			
-			Restaurant r = new Restaurant(name,id,address,rating,review_count);
+			Restaurant r = new Restaurant(name,id,address,city,state,rating,review_count);
 			list.add(r);
 		}
 
