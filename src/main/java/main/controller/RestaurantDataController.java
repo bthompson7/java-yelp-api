@@ -28,39 +28,42 @@ public class RestaurantDataController {
 
 		List<Restaurant> list = new ArrayList<Restaurant>();
 
-
 		APICallService api = new APICallService();
 		String dataFromYelp = api.searchForBusinesses(lat, lng, food_type);
-		
-		
-		//parsing the json data from yelp
+
+		// parsing the json data from yelp
 		JsonObject jsonObject = JsonParser.parseString(dataFromYelp.toString()).getAsJsonObject();
 		JsonArray rest_list = jsonObject.get("businesses").getAsJsonArray();
-		
-		
-		for(int i =0; i < rest_list.size(); i++) {
-			
+
+		for (int i = 0; i < rest_list.size(); i++) {
+
 			JsonObject restaurant = rest_list.get(i).getAsJsonObject();
-			String name = restaurant.get("name").toString();
-			String id = restaurant.get("id").toString();
+			String name = restaurant.get("name").getAsString();
+			String id = restaurant.get("id").getAsString();
 			int review_count = restaurant.get("review_count").getAsInt();
-						
 
 			double rating = restaurant.get("rating").getAsDouble();
-			
+
 			JsonObject loc = restaurant.get("location").getAsJsonObject();
-			
-			String address = loc.get("address1").toString() + loc.get("address2").toString()
-				+ loc.get("address3").toString();
-			
-			
-			String city = loc.get("city").toString();
-            String state = loc.get("state").toString();
-
-
 
 			
-			Restaurant r = new Restaurant(name,id,address,city,state,rating,review_count);
+			String address = loc.get("address1").getAsString() + " ";
+			
+			//address2 and address3 are really only used
+			//when a restaurant is in a building number
+			//like => 123 Main Street building A suite 3 or something like that
+			//it's more of an edge case
+			if(!loc.get("address2").isJsonNull()) {
+				address += loc.get("address2").getAsString();
+			}else if(!loc.get("address3").isJsonNull()) {
+				address += loc.get("address3").getAsString();
+
+			}
+	
+			String city = loc.get("city").getAsString();
+			String state = loc.get("state").getAsString();
+
+			Restaurant r = new Restaurant(name, id, address, city, state, rating, review_count);
 			list.add(r);
 		}
 
