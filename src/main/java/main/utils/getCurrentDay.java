@@ -2,17 +2,12 @@ package main.utils;
 
 public class getCurrentDay {
 
-	
-	
 	public getCurrentDay() {
-		
-	}
-	
-	
 
-	
+	}
+
 	public int dayOfWeekToInt(String day) {
-		switch(day) {
+		switch (day) {
 		case "monday":
 			return 0;
 		case "tuesday":
@@ -28,9 +23,8 @@ public class getCurrentDay {
 		case "sunday":
 			return 6;
 
-		
 		}
-		
+
 		return 0;
 	}
 }

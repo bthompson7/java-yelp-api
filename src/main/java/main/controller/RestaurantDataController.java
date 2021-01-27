@@ -31,7 +31,7 @@ public class RestaurantDataController {
 		APICallService api = new APICallService();
 		String dataFromYelp = api.searchForBusinesses(lat, lng, food_type);
 
-		//parsing the json data from yelp
+		// parsing the json data from yelp
 		JsonObject jsonObject = JsonParser.parseString(dataFromYelp.toString()).getAsJsonObject();
 		JsonArray rest_list = jsonObject.get("businesses").getAsJsonArray();
 
@@ -46,20 +46,19 @@ public class RestaurantDataController {
 
 			JsonObject loc = restaurant.get("location").getAsJsonObject();
 
-			
 			String address = loc.get("address1").getAsString() + " ";
-			
-			//address2 and address3 are really only used
-			//when a restaurant is in a building number
-			//like => 123 Main Street building A suite 3 or something like that
-			//it's more of an edge case
-			if(!loc.get("address2").isJsonNull()) {
+
+			// address2 and address3 are really only used
+			// when a restaurant is in a building number
+			// like => 123 Main Street building A suite 3 or something like that
+			// it's more of an edge case
+			if (!loc.get("address2").isJsonNull()) {
 				address += loc.get("address2").getAsString();
-			}else if(!loc.get("address3").isJsonNull()) {
+			} else if (!loc.get("address3").isJsonNull()) {
 				address += loc.get("address3").getAsString();
 
 			}
-	
+
 			String city = loc.get("city").getAsString();
 			String state = loc.get("state").getAsString();
 

@@ -11,6 +11,9 @@ public class RestaurantDetails {
 	private String location;
 	private String open_time;
 	private String close_time;
+	private String city;
+	private String state;
+	private boolean is_open_now;
 
 	private double lat;
 	private double lng;
@@ -28,16 +31,19 @@ public class RestaurantDetails {
 	 * @param lng
 	 */
 	public RestaurantDetails(String name, String phone, String overall_rating, 
-			String price, String location, String open_time, String close_time, String[] photos,
-			double lat, double lng) {
+			String price, String location,  String city, String state, String open_time, String close_time, 
+			boolean is_open_now, String[] photos, double lat, double lng) {
 		
 		this.name = name;
 		this.phone = phone;
 		this.overall_rating = overall_rating;
 		this.price = price;
 		this.location = location;
+		this.city = city;
+		this.state = state;
 		this.open_time = open_time;
 		this.close_time = close_time;
+		this.is_open_now = is_open_now;
 		this.photos = photos;
 		this.lat = lat;
 		this.lng = lng;
@@ -82,6 +88,18 @@ public class RestaurantDetails {
 
 	public String getClose_time() {
 		return close_time;
+	}
+
+	public boolean isIs_open_now() {
+		return is_open_now;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getState() {
+		return state;
 	}
 
 
