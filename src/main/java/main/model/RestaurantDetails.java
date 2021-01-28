@@ -36,7 +36,7 @@ public class RestaurantDetails {
 		
 		this.name = name;
 		this.phone = phone;
-		this.overall_rating = overall_rating;
+		this.overall_rating = 	overall_rating;
 		this.price = price;
 		this.location = location;
 		this.city = city;
